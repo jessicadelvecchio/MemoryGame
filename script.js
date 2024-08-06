@@ -1,4 +1,6 @@
 const gameContainer = document.getElementById("game");
+let cardCounter = 0; // card counter 
+
 
 const COLORS = [
   "red",
@@ -60,30 +62,36 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 function handleCardClick(event) {
 
-  // define clicked card
-  let clickedCard = event.target;
-  let clickedDivColor = event.target.classList.value;
+  let clickedCard = event.target;  // define clicked card
+  let clickedDivColor = event.target.classList.value;  // define background color, is class name
+  cardCounter++;
 
-  //TODO Clicking a card should change the background color to be the color of the class it has.
-  for (let i = 0; i++; i < shuffledColors.length) {
-    if (shuffledColors[i] === clickedDivColor) {
-      clickedCard.style.backgroundColor = { clickedDivColor };
-      break;
+
+  //TODO Users should only be able to change at most two cards at a time.
+  if (cardCounter < 2) {   // only if counter is < 2 allow bgcolor change
+
+    //TODO Clicking a card should change the background color to be the color of the class it has. 
+    // change background color of clicked card
+    for (let i = 0; i < 2; i++) {
+      if (shuffledColors[i] === clickedDivColor) {
+        clickedCard.style.backgroundColor = { clickedDivColor };
+      }
     }
+  } else {
+    setTimeout(() => {
+      counter = 0;
+    }, "1000");
   }
 
 
 
 
 
-  // define background color, is class name
-  // change background color of clicked card
 
-  //TODO Users should only be able to change at most two cards at a time.
 
   // define first card
   // define second card
-  // only allow two cards at a time
+
 
   //TODO Clicking on two matching cards should be a “match” — those cards should stay face up.
 
@@ -92,7 +100,7 @@ function handleCardClick(event) {
   // boolean value for flipped or not, define variable for this
   // should each card be an object to add this? or is that complicating things?
 
-  //TODO When clicking two cards that are not a match, they should stay turned over for at least 1 second before they hide the color again. You should make sure to use a  so that you can execute code after one second.
+  //TODO When clicking two cards that are not a match, they should stay turned over for at least 1 second before they hide the color again. You should make sure to use a timer so that you can execute code after one second.
 
   // setTimeout***
 
@@ -100,6 +108,7 @@ function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   console.log("you just clicked", event.target, clickedDivColor);
   console.log(event.target.style.backgroundColor = clickedDivColor);
+  console.log(cardCounter);
 }
 
 
