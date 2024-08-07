@@ -1,5 +1,8 @@
 const gameContainer = document.getElementById("game");
-let cardCounter = 0; // card counter 
+// let cardCounter = 0; // card counter 
+let preventClicking = false;
+let cardOne = null;
+let cardTwo = null;
 
 
 const COLORS = [
@@ -62,8 +65,13 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 function handleCardClick(event) {
 
+  //if prevent clicking is true, return/do nothing
+  //if cardCounter is < 2 preventclicking is false. else true
+  // if cardone and cardtwo is not undefined then two cards have been clicked. Then 
+
   let clickedCard = event.target;  // define clicked card
   let clickedDivColor = event.target.classList.value;  // define background color, is class name
+  cardFront = true;
   cardCounter++;
 
 
@@ -72,15 +80,17 @@ function handleCardClick(event) {
 
     //TODO Clicking a card should change the background color to be the color of the class it has. 
     // change background color of clicked card
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < shuffledColors.length; i++) {
       if (shuffledColors[i] === clickedDivColor) {
         clickedCard.style.backgroundColor = { clickedDivColor };
       }
     }
   } else {
     setTimeout(() => {
-      counter = 0;
-    }, "1000");
+      cardCounter = 0;
+      cardFront = false;
+      clickedCard.style.backgroundColor = "";
+    }, 1000); // numerical value, not string
   }
 
 
